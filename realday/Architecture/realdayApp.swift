@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct realdayApp: App {
+    
+    @StateObject var userManager: UserManager = UserManager()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ArchitectureGate()
         }
+        .environmentObject(userManager)
     }
 }

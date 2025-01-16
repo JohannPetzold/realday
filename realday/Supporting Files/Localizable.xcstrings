@@ -1,0 +1,21 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Login" : {
+
+    },
+    "RealDay" : {
+
+    },
+    "Returning user?" : {
+
+    },
+    "Share your day with your friends!" : {
+
+    },
+    "Sign Up" : {
+
+    }
+  },
+  "version" : "1.0"
+}
