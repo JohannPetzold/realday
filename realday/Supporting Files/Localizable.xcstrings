@@ -1,19 +1,19 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Login" : {
+    "Already an account? Login" : {
+
+    },
+    "Hello, World!" : {
+
+    },
+    "or" : {
 
     },
     "RealDay" : {
 
     },
-    "Returning user?" : {
-
-    },
     "Share your day with your friends!" : {
-
-    },
-    "Sign Up" : {
 
     }
   },

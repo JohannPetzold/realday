@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+// MARK: - Onboarding View Model
+
+class OnboardingViewModel: ObservableObject {
+    
+}
