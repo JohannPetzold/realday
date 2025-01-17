@@ -15,8 +15,8 @@
 		407D7EFB2D398A6500520288 /* realdayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407D7EF32D398A6500520288 /* realdayApp.swift */; };
 		407D7F002D398CF700520288 /* ArchitectureGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407D7EFF2D398CF700520288 /* ArchitectureGate.swift */; };
 		407D7F032D398D2500520288 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407D7F022D398D2500520288 /* UserManager.swift */; };
-		407D7F062D398DC000520288 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 407D7F052D398DC000520288 /* DesignSystem */; };
-		407D7F082D398DC000520288 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 407D7F072D398DC000520288 /* Models */; };
+		4082226A2D3A725C00710A23 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408222692D3A725C00710A23 /* UINavigationController+Extension.swift */; };
+		408222732D3A76E800710A23 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 408222722D3A76E800710A23 /* DesignSystem */; };
 		40C38A302D39B47E00FFDF97 /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C38A2F2D39B47E00FFDF97 /* SignUp.swift */; };
 		40C38A322D39B48800FFDF97 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C38A312D39B48800FFDF97 /* SignUpViewModel.swift */; };
 		40C38A3A2D39B64500FFDF97 /* LogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C38A392D39B64500FFDF97 /* LogIn.swift */; };
@@ -41,8 +41,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		406A4DD32D3997F3008F13C7 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
-		406A4DD52D39980B008F13C7 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Models; sourceTree = "<group>"; };
 		407D7EA82D3988CE00520288 /* realday.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = realday.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		407D7EB82D3988CF00520288 /* realdayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = realdayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		407D7EC22D3988CF00520288 /* realdayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = realdayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +52,9 @@
 		407D7EF32D398A6500520288 /* realdayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = realdayApp.swift; sourceTree = "<group>"; };
 		407D7EFF2D398CF700520288 /* ArchitectureGate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchitectureGate.swift; sourceTree = "<group>"; };
 		407D7F022D398D2500520288 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		408222692D3A725C00710A23 /* UINavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extension.swift"; sourceTree = "<group>"; };
+		4082226B2D3A764200710A23 /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
+		408222742D3A774500710A23 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Models; sourceTree = "<group>"; };
 		40C38A2F2D39B47E00FFDF97 /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		40C38A312D39B48800FFDF97 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		40C38A392D39B64500FFDF97 /* LogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogIn.swift; sourceTree = "<group>"; };
@@ -78,8 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				407D7F082D398DC000520288 /* Models in Frameworks */,
-				407D7F062D398DC000520288 /* DesignSystem in Frameworks */,
+				408222732D3A76E800710A23 /* DesignSystem in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,8 +103,8 @@
 		407D7E9F2D3988CE00520288 = {
 			isa = PBXGroup;
 			children = (
-				406A4DD52D39980B008F13C7 /* Models */,
-				406A4DD32D3997F3008F13C7 /* DesignSystem */,
+				408222742D3A774500710A23 /* Models */,
+				4082226B2D3A764200710A23 /* DesignSystem */,
 				407D7EF42D398A6500520288 /* realday */,
 				407D7EBB2D3988CF00520288 /* realdayTests */,
 				407D7EC52D3988CF00520288 /* realdayUITests */,
@@ -158,6 +158,7 @@
 			children = (
 				407D7EF22D398A6500520288 /* Supporting Files */,
 				407D7EFD2D398AC000520288 /* Preview Content */,
+				408222682D3A724900710A23 /* Convenients */,
 				407D7F012D398D1700520288 /* Managers */,
 				407D7EEC2D398A6500520288 /* Architecture */,
 			);
@@ -185,6 +186,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		408222682D3A724900710A23 /* Convenients */ = {
+			isa = PBXGroup;
+			children = (
+				408222692D3A725C00710A23 /* UINavigationController+Extension.swift */,
+			);
+			path = Convenients;
 			sourceTree = "<group>";
 		};
 		40C38A2E2D39B41700FFDF97 /* SignUp */ = {
@@ -222,8 +231,8 @@
 			);
 			name = realday;
 			packageProductDependencies = (
-				407D7F052D398DC000520288 /* DesignSystem */,
 				407D7F072D398DC000520288 /* Models */,
+				408222722D3A76E800710A23 /* DesignSystem */,
 			);
 			productName = realday;
 			productReference = 407D7EA82D3988CE00520288 /* realday.app */;
@@ -358,6 +367,7 @@
 				40C38A3C2D39B65800FFDF97 /* LogInViewModel.swift in Sources */,
 				407D7F032D398D2500520288 /* UserManager.swift in Sources */,
 				407D7EFB2D398A6500520288 /* realdayApp.swift in Sources */,
+				4082226A2D3A725C00710A23 /* UINavigationController+Extension.swift in Sources */,
 				40C38A322D39B48800FFDF97 /* SignUpViewModel.swift in Sources */,
 				40C38A3A2D39B64500FFDF97 /* LogIn.swift in Sources */,
 			);
@@ -690,13 +700,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		407D7F052D398DC000520288 /* DesignSystem */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DesignSystem;
-		};
 		407D7F072D398DC000520288 /* Models */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Models;
+		};
+		408222722D3A76E800710A23 /* DesignSystem */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DesignSystem;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

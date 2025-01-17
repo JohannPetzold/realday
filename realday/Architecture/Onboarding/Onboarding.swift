@@ -46,7 +46,7 @@ struct Onboarding: View {
                 
                 Spacer()
                     
-                    VStack(spacing: .DesignSystem.Spacing.xl) {
+                    VStack(spacing: .DesignSystem.Spacing.xxl) {
                         
                         VStack(spacing: .DesignSystem.Spacing.l) {
                             
@@ -99,10 +99,10 @@ struct Onboarding: View {
                     .ignoresSafeArea(.all)
             )
             .navigationDestination(isPresented: $presentSignUp) {
-                SignUp()
+                SignUp(isPresented: $presentSignUp)
             }
             .navigationDestination(isPresented: $presentLogIn) {
-                LogIn()
+                LogIn(isPresented: $presentLogIn)
             }
             
         }

@@ -4,7 +4,7 @@
     "Already an account? Login" : {
 
     },
-    "Hello, World!" : {
+    "Create an account to start your RealDay experience" : {
 
     },
     "or" : {
@@ -14,6 +14,12 @@
 
     },
     "Share your day with your friends!" : {
+
+    },
+    "Welcome" : {
+
+    },
+    "Welcome back" : {
 
     }
   },
