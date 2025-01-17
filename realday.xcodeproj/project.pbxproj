@@ -24,6 +24,12 @@
 		40C38A322D39B48800FFDF97 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C38A312D39B48800FFDF97 /* SignUpViewModel.swift */; };
 		40C38A3A2D39B64500FFDF97 /* LogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C38A392D39B64500FFDF97 /* LogIn.swift */; };
 		40C38A3C2D39B65800FFDF97 /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C38A3B2D39B65800FFDF97 /* LogInViewModel.swift */; };
+		40D919322D3AB308000802E3 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D919312D3AB308000802E3 /* AppManager.swift */; };
+		40D919342D3AB829000802E3 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D919332D3AB829000802E3 /* Home.swift */; };
+		40D919362D3AB88D000802E3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D919352D3AB88D000802E3 /* HomeViewModel.swift */; };
+		40D919392D3AC78E000802E3 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D919382D3AC78E000802E3 /* UserProfile.swift */; };
+		40D919402D3AD876000802E3 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D9193F2D3AD876000802E3 /* UserProfileViewModel.swift */; };
+		40D919442D3AEA76000802E3 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D919432D3AEA76000802E3 /* PostView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +70,13 @@
 		40C38A312D39B48800FFDF97 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		40C38A392D39B64500FFDF97 /* LogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogIn.swift; sourceTree = "<group>"; };
 		40C38A3B2D39B65800FFDF97 /* LogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
+		40D919312D3AB308000802E3 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
+		40D919332D3AB829000802E3 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		40D919352D3AB88D000802E3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		40D919382D3AC78E000802E3 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		40D9193F2D3AD876000802E3 /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
+		40D919412D3AE2E7000802E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		40D919432D3AEA76000802E3 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -110,6 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				4022F3F62D3A831700820E44 /* DashboardGate.swift */,
+				40D919332D3AB829000802E3 /* Home.swift */,
+				40D919352D3AB88D000802E3 /* HomeViewModel.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -155,6 +170,8 @@
 				40C38A2E2D39B41700FFDF97 /* SignUp */,
 				40C38A382D39B63700FFDF97 /* LogIn */,
 				4022F3F52D3A825C00820E44 /* Dashboard */,
+				40D919372D3AC77D000802E3 /* UserProfile */,
+				40D919422D3AEA64000802E3 /* PostView */,
 			);
 			path = Architecture;
 			sourceTree = "<group>";
@@ -171,6 +188,7 @@
 		407D7EF42D398A6500520288 /* realday */ = {
 			isa = PBXGroup;
 			children = (
+				40D919412D3AE2E7000802E3 /* Info.plist */,
 				407D7EF22D398A6500520288 /* Supporting Files */,
 				407D7EFD2D398AC000520288 /* Preview Content */,
 				408222682D3A724900710A23 /* Convenients */,
@@ -191,6 +209,7 @@
 		407D7F012D398D1700520288 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				40D919312D3AB308000802E3 /* AppManager.swift */,
 				407D7F022D398D2500520288 /* UserManager.swift */,
 				4022F3F32D3A806F00820E44 /* AppStorageManager.swift */,
 			);
@@ -228,6 +247,23 @@
 				40C38A3B2D39B65800FFDF97 /* LogInViewModel.swift */,
 			);
 			path = LogIn;
+			sourceTree = "<group>";
+		};
+		40D919372D3AC77D000802E3 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				40D919382D3AC78E000802E3 /* UserProfile.swift */,
+				40D9193F2D3AD876000802E3 /* UserProfileViewModel.swift */,
+			);
+			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		40D919422D3AEA64000802E3 /* PostView */ = {
+			isa = PBXGroup;
+			children = (
+				40D919432D3AEA76000802E3 /* PostView.swift */,
+			);
+			path = PostView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,11 +418,17 @@
 				407D7EF92D398A6500520288 /* OnboardingViewModel.swift in Sources */,
 				40C38A3C2D39B65800FFDF97 /* LogInViewModel.swift in Sources */,
 				407D7F032D398D2500520288 /* UserManager.swift in Sources */,
+				40D919342D3AB829000802E3 /* Home.swift in Sources */,
+				40D919322D3AB308000802E3 /* AppManager.swift in Sources */,
+				40D919362D3AB88D000802E3 /* HomeViewModel.swift in Sources */,
 				407D7EFB2D398A6500520288 /* realdayApp.swift in Sources */,
 				4022F3F72D3A831700820E44 /* DashboardGate.swift in Sources */,
 				4022F3F42D3A806F00820E44 /* AppStorageManager.swift in Sources */,
+				40D919392D3AC78E000802E3 /* UserProfile.swift in Sources */,
 				4082226A2D3A725C00710A23 /* UINavigationController+Extension.swift in Sources */,
 				40C38A322D39B48800FFDF97 /* SignUpViewModel.swift in Sources */,
+				40D919402D3AD876000802E3 /* UserProfileViewModel.swift in Sources */,
+				40D919442D3AEA76000802E3 /* PostView.swift in Sources */,
 				40C38A3A2D39B64500FFDF97 /* LogIn.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -553,8 +595,10 @@
 				DEVELOPMENT_TEAM = 99934KCD3X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = realday/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = RealDay;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Take picture of your day";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -584,8 +628,10 @@
 				DEVELOPMENT_TEAM = 99934KCD3X;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = realday/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = RealDay;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Take picture of your day";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

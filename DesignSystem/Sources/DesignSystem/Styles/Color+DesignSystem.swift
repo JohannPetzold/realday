@@ -13,5 +13,7 @@ extension Color {
     public enum DesignSystem {
         
         public static let skeletonBackground: Color = .init(.skeletonBackground)
+        public static let buttonBackground: Color = .init(.buttonBackground)
+        public static let shadow: Color = .init(.shadow)
     }
 }

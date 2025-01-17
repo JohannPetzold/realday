@@ -26,7 +26,7 @@ public struct ProfilePictureSmall: View {
     
     // MARK: Constants
     
-    private let imageSize: CGSize = .init(width: 20, height: 20)
+    private let imageSize: CGSize = .init(width: 28, height: 28)
     
     // MARK: Init
     
@@ -69,7 +69,7 @@ public struct ProfilePictureSmall: View {
                     Image(systemName: "person")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 8, height: 8)
+                        .frame(width: 12, height: 12)
                         .foregroundStyle(.primary)
                     
                 }
@@ -79,7 +79,7 @@ public struct ProfilePictureSmall: View {
             }
             
             Text("\(user.firstName) \(user.lastName)")
-                .font(.DesignSystem.sub1(weight: .bold))
+                .font(.DesignSystem.body2(weight: .bold))
                 .foregroundStyle(.primary)
                 .lineLimit(1)
             

@@ -9,20 +9,19 @@ import Foundation
 
 extension Bundle {
     
-    func decode<T: Decodable>(_ type: T.Type, from file: String) -> T? {
-        guard let url = self.url(forResource: file, withExtension: "json") else {
-            print("Failed to locate \(file) in bundle.")
-            return nil
-        }
+    func decode<T: Decodable>(_ type: T.Type, from url: URL) -> T? {
         guard let data = try? Data(contentsOf: url) else {
-            print("Failed to load \(file) from bundle.")
+            print("Failed to load \(url) from bundle.")
             return nil
         }
         let decoder = JSONDecoder()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        decoder.dateDecodingStrategy = .formatted(dateFormatter)
         do {
             return try decoder.decode(T.self, from: data)
         } catch {
-            print("Failed to decode \(file): \(error)")
+            print("Failed to decode \(url): \(error)")
             return nil
         }
     }

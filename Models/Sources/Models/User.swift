@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - User
 
-public struct User: Codable, Sendable {
+public struct User: Codable, Sendable, Hashable {
 
     // MARK: Properties
     
@@ -19,21 +19,24 @@ public struct User: Codable, Sendable {
     public var email: String
     public var password: String // Local
     public var profilePictureUrlString: String?
+    public var posts: [Post]?
     
     // MARK: Init
     
-    public init(id: String, firstName: String, lastName: String, email: String, password: String, profilePictureUrlString: String? = nil) {
+    public init(id: String, firstName: String, lastName: String, email: String, password: String, profilePictureUrlString: String? = nil, posts: [Post]? = nil) {
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
         self.password = password
         self.profilePictureUrlString = profilePictureUrlString
+        self.posts = posts
     }
     
     public static func randomUser() -> User {
         // Load users from JSON
-        guard let users: [User] = Bundle.module.decode([User].self, from: "random_users") else {
+        guard let url = Bundle.module.url(forResource: "random_users", withExtension: "json"),
+              let users: [User] = Bundle.module.decode([User].self, from: url) else {
             fatalError("Could not load users from JSON.")
         }
         

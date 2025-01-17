@@ -10,11 +10,11 @@ import SwiftUI
 import OSLog
 import Models
 
-// MARK: Logger
+// MARK: - Logger
 
-fileprivate let logger: Logger = .init(subsystem: "RealDay", category: "User Manager")
+fileprivate let logger: Logger = .init(subsystem: "RealDay", category: "UserManager")
 
-// MARK: User Manager
+// MARK: - User Manager
 
 class UserManager: ObservableObject {
     
@@ -25,6 +25,7 @@ class UserManager: ObservableObject {
     // MARK: Published
     
     @Published var user: User?
+    @Published var selectedIndex: Int = 0
     
     // MARK: Init
     
