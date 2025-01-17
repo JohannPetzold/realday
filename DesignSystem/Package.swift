@@ -22,6 +22,9 @@ let package = Package(
             name: "DesignSystem",
             dependencies: [
                 .product(name: "Models", package: "Models"),
+            ],
+            resources: [
+                .process("Resources")
             ]
         ),
         .testTarget(

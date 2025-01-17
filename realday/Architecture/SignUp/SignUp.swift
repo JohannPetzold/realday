@@ -160,7 +160,7 @@ struct SignUp: View {
                     }
                     
                     if focusedField == nil && !disableSignUp() {
-                     
+                        
                         TextButton(
                             text: "Sign Up",
                             type: .blue,

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4022F3E72D3A7F9600820E44 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 407D7F072D398DC000520288 /* Models */; };
+		4022F3F42D3A806F00820E44 /* AppStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4022F3F32D3A806F00820E44 /* AppStorageManager.swift */; };
+		4022F3F72D3A831700820E44 /* DashboardGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4022F3F62D3A831700820E44 /* DashboardGate.swift */; };
 		407D7EF52D398A6500520288 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 407D7EEF2D398A6500520288 /* Assets.xcassets */; };
 		407D7EF62D398A6500520288 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 407D7EF02D398A6500520288 /* Localizable.xcstrings */; };
 		407D7EF72D398A6500520288 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 407D7EF12D398A6500520288 /* Preview Assets.xcassets */; };
@@ -41,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4022F3F32D3A806F00820E44 /* AppStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageManager.swift; sourceTree = "<group>"; };
+		4022F3F62D3A831700820E44 /* DashboardGate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardGate.swift; sourceTree = "<group>"; };
 		407D7EA82D3988CE00520288 /* realday.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = realday.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		407D7EB82D3988CF00520288 /* realdayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = realdayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		407D7EC22D3988CF00520288 /* realdayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = realdayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4022F3E72D3A7F9600820E44 /* Models in Frameworks */,
 				408222732D3A76E800710A23 /* DesignSystem in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,6 +106,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4022F3F52D3A825C00820E44 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				4022F3F62D3A831700820E44 /* DashboardGate.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
 		407D7E9F2D3988CE00520288 = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +154,7 @@
 				407D7EEA2D398A6500520288 /* Onboarding */,
 				40C38A2E2D39B41700FFDF97 /* SignUp */,
 				40C38A382D39B63700FFDF97 /* LogIn */,
+				4022F3F52D3A825C00820E44 /* Dashboard */,
 			);
 			path = Architecture;
 			sourceTree = "<group>";
@@ -177,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				407D7F022D398D2500520288 /* UserManager.swift */,
+				4022F3F32D3A806F00820E44 /* AppStorageManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -367,6 +383,8 @@
 				40C38A3C2D39B65800FFDF97 /* LogInViewModel.swift in Sources */,
 				407D7F032D398D2500520288 /* UserManager.swift in Sources */,
 				407D7EFB2D398A6500520288 /* realdayApp.swift in Sources */,
+				4022F3F72D3A831700820E44 /* DashboardGate.swift in Sources */,
+				4022F3F42D3A806F00820E44 /* AppStorageManager.swift in Sources */,
 				4082226A2D3A725C00710A23 /* UINavigationController+Extension.swift in Sources */,
 				40C38A322D39B48800FFDF97 /* SignUpViewModel.swift in Sources */,
 				40C38A3A2D39B64500FFDF97 /* LogIn.swift in Sources */,

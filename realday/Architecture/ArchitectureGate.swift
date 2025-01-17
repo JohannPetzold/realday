@@ -13,7 +13,7 @@ struct ArchitectureGate: View {
     
     // MARK: Environments
     
-    @EnvironmentObject var userManager: UserManager
+    @StateObject var userManager: UserManager = .shared
     
     // MARK: Layout
     
@@ -26,7 +26,7 @@ struct ArchitectureGate: View {
                 
             } else {
                 
-                
+                DashboardGate()
                 
             }
         }

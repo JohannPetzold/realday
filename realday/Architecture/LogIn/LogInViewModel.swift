@@ -55,6 +55,9 @@ class LogInViewModel: ObservableObject {
             do {
                 try await Task.sleep(nanoseconds: 2_000_000_000)
                 await MainActor.run {
+                    UserManager.shared.loginUser(email: email, password: password) {
+                        self.errorLogIn = true
+                    }
                     isLoadingLogIn = false
                 }
             } catch {

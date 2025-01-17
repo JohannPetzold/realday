@@ -84,6 +84,7 @@ class SignUpViewModel: ObservableObject {
             do {
                 try await Task.sleep(nanoseconds: 2_000_000_000)
                 await MainActor.run {
+                    UserManager.shared.signUser(firstName: firstName, lastName: lastName, email: email, password: password)
                     isLoadingSignUp = false
                 }
             } catch {
