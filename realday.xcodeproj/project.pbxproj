@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4022F3E72D3A7F9600820E44 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 407D7F072D398DC000520288 /* Models */; };
 		4022F3F42D3A806F00820E44 /* AppStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4022F3F32D3A806F00820E44 /* AppStorageManager.swift */; };
-		4022F3F72D3A831700820E44 /* DashboardGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4022F3F62D3A831700820E44 /* DashboardGate.swift */; };
 		407D7EF52D398A6500520288 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 407D7EEF2D398A6500520288 /* Assets.xcassets */; };
 		407D7EF62D398A6500520288 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 407D7EF02D398A6500520288 /* Localizable.xcstrings */; };
 		407D7EF72D398A6500520288 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 407D7EF12D398A6500520288 /* Preview Assets.xcassets */; };
@@ -51,7 +50,6 @@
 
 /* Begin PBXFileReference section */
 		4022F3F32D3A806F00820E44 /* AppStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageManager.swift; sourceTree = "<group>"; };
-		4022F3F62D3A831700820E44 /* DashboardGate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardGate.swift; sourceTree = "<group>"; };
 		407D7EA82D3988CE00520288 /* realday.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = realday.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		407D7EB82D3988CF00520288 /* realdayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = realdayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		407D7EC22D3988CF00520288 /* realdayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = realdayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,14 +117,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4022F3F52D3A825C00820E44 /* Dashboard */ = {
+		4022F3F52D3A825C00820E44 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				4022F3F62D3A831700820E44 /* DashboardGate.swift */,
 				40D919332D3AB829000802E3 /* Home.swift */,
 				40D919352D3AB88D000802E3 /* HomeViewModel.swift */,
 			);
-			path = Dashboard;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		407D7E9F2D3988CE00520288 = {
@@ -169,7 +166,7 @@
 				407D7EEA2D398A6500520288 /* Onboarding */,
 				40C38A2E2D39B41700FFDF97 /* SignUp */,
 				40C38A382D39B63700FFDF97 /* LogIn */,
-				4022F3F52D3A825C00820E44 /* Dashboard */,
+				4022F3F52D3A825C00820E44 /* Home */,
 				40D919372D3AC77D000802E3 /* UserProfile */,
 				40D919422D3AEA64000802E3 /* PostView */,
 			);
@@ -368,6 +365,8 @@
 			);
 			mainGroup = 407D7E9F2D3988CE00520288;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 407D7EA92D3988CE00520288 /* Products */;
 			projectDirPath = "";
@@ -422,7 +421,6 @@
 				40D919322D3AB308000802E3 /* AppManager.swift in Sources */,
 				40D919362D3AB88D000802E3 /* HomeViewModel.swift in Sources */,
 				407D7EFB2D398A6500520288 /* realdayApp.swift in Sources */,
-				4022F3F72D3A831700820E44 /* DashboardGate.swift in Sources */,
 				4022F3F42D3A806F00820E44 /* AppStorageManager.swift in Sources */,
 				40D919392D3AC78E000802E3 /* UserProfile.swift in Sources */,
 				4082226A2D3A725C00710A23 /* UINavigationController+Extension.swift in Sources */,

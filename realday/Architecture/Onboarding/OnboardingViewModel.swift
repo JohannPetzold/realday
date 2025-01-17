@@ -6,9 +6,15 @@
 //
 
 import Foundation
+import Models
 
 // MARK: - Onboarding View Model
 
 class OnboardingViewModel: ObservableObject {
     
+    // MARK: Methods
+    
+    func signInWithApple() -> Void {
+        UserManager.shared.signInWithApple()
+    }
 }

@@ -39,6 +39,12 @@ class UserManager: ObservableObject {
         AppStorageManager.shared.setUser(self.user)
     }
     
+    func signInWithApple() -> Void {
+        self.user = .randomUser()
+        self.user?.posts = Post.randomPosts(count: 4)
+        AppStorageManager.shared.setUser(self.user)
+    }
+    
     func loginUser(email: String, password: String, _ emptyCompletion: @escaping () -> Void) -> Void {
         guard let storedUser = AppStorageManager.shared.getUser(),
               storedUser.email == email && storedUser.password == password else {

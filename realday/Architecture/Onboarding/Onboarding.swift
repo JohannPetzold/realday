@@ -69,7 +69,7 @@ struct Onboarding: View {
                                 font: .DesignSystem.body1(weight: .bold),
                                 isLoading: false,
                                 disabled: false,
-                                action: {}
+                                action: onTapSignInWithApple
                             )
                             
                         }
@@ -136,6 +136,10 @@ struct Onboarding: View {
     
     private func onTapLogIn() -> Void {
         presentLogIn = true
+    }
+    
+    private func onTapSignInWithApple() -> Void {
+        model.signInWithApple()
     }
 }
 

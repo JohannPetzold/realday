@@ -1,19 +1,13 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "" : {
-
-    },
     "Already an account? Login" : {
-
-    },
-    "Camera" : {
 
     },
     "Create an account to start your RealDay experience" : {
 
     },
-    "Home" : {
+    "Disconnect" : {
 
     },
     "or" : {
@@ -23,6 +17,9 @@
 
     },
     "Share your day with your friends!" : {
+
+    },
+    "Today" : {
 
     },
     "Welcome" : {

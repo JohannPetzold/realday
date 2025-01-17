@@ -61,7 +61,7 @@ struct UserProfile: View {
                                                 .padding(.leading, .DesignSystem.Spacing.xl)
                                             
                                             PostThumbnailCarousel2(
-                                                posts: model.filteredPosts[i],
+                                                posts: model.filteredPosts[i].sorted(by: { $0.created > $1.created }),
                                                 showDate: false,
                                                 tapAction: onTapPost(_:))
                                             
@@ -99,6 +99,7 @@ struct UserProfile: View {
                             .padding(.bottom, .DesignSystem.Spacing.xxl)
                             
                             Spacer()
+                            Spacer()
                             
                         }
                         .padding(.top, navBarHeight + .DesignSystem.Spacing.s)
@@ -119,13 +120,32 @@ struct UserProfile: View {
                 
             }
             
-            ImageButton(
-                image: Image(systemName: "chevron.left"),
-                color: .primary,
-                contentMode: .fit,
-                size: .init(width: 20, height: 26),
-                action: onTapBack
-            )
+            HStack(spacing: 0) {
+                
+                ImageButton(
+                    image: Image(systemName: "chevron.left"),
+                    color: .primary,
+                    contentMode: .fit,
+                    size: .init(width: 20, height: 26),
+                    action: onTapBack
+                )
+                .padding(.trailing, .DesignSystem.Spacing.l)
+                .contentShape(Rectangle())
+                
+                Spacer()
+                
+                if user?.id == userManager.user?.id {
+                
+                    Button(action: onTapDisconnect) {
+                        Text("Disconnect")
+                            .font(.DesignSystem.body2(weight: .medium))
+                            .foregroundStyle(Color.primary)
+                            .contentShape(Rectangle())
+                    }
+                    
+                }
+                
+            }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, .DesignSystem.Spacing.s)
             .padding(.bottom, .DesignSystem.Spacing.m)
@@ -198,6 +218,10 @@ struct UserProfile: View {
     
     private func onTapPost(_ post: Post) -> Void {
         
+    }
+    
+    private func onTapDisconnect() -> Void {
+        userManager.disconnect()
     }
 }
 

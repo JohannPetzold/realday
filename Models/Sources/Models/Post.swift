@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Post
 
-public struct Post: Codable, Sendable, Equatable, Hashable {
+public struct Post: Codable, Sendable, Equatable, Hashable, Identifiable {
     
     // MARK: Properties
     
@@ -49,34 +49,14 @@ public struct Post: Codable, Sendable, Equatable, Hashable {
         randomPost.created = randomCreatedDate
         randomPost.updated = randomUpdatedDate
         
+        randomPost.id = UUID().uuidString
+        
         return randomPost
     }
     
     public static func randomPosts(count: Int) -> [Post] {
-        guard let url = Bundle.module.url(forResource: "random_posts", withExtension: "json"),
-              let posts = Bundle.module.decode([Post].self, from: url) else {
-            fatalError("Impossible de charger le fichier JSON.")
-        }
-        
-        guard !posts.isEmpty else {
-            fatalError("Le fichier JSON ne contient aucun post.")
-        }
-        
-        let now = Date()
-        let threeDaysAgo = Calendar.current.date(byAdding: .day, value: -3, to: now)!
-        
         return (0..<count).compactMap { _ in
-            guard var randomPost = posts.randomElement() else {
-                return nil
-            }
-            
-            let randomCreatedDate = Date.randomDateBetween(start: threeDaysAgo, end: now)
-            let randomUpdatedDate = Date.randomDateBetween(start: randomCreatedDate, end: now)
-            
-            randomPost.created = randomCreatedDate
-            randomPost.updated = randomUpdatedDate
-            
-            return randomPost
+            return .randomPost()
         }
     }
 }

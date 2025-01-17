@@ -26,7 +26,7 @@ struct ArchitectureGate: View {
                 
             } else {
                 
-                DashboardGate()
+                Home()
                 
             }
         }
