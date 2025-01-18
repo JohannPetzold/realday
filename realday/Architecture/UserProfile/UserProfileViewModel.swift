@@ -18,7 +18,6 @@ class UserProfileViewModel: ObservableObject {
     @Published var filteredPosts: [[Post]] = []
     @Published var pictureUrl: String?
     @Published var isLoadingDatas: Bool = true
-    @Published var errorCamera: Bool = false
     
     // MARK: Methods
     

@@ -21,7 +21,8 @@ struct Search: View {
     
     @StateObject private var model: SearchViewModel = SearchViewModel()
     @StateObject private var appManager: AppManager = .shared
-    @State private var navBarHeight: CGFloat = 0
+    @State private var isUserPresented: Bool = false
+    @State private var presentedUser: User? = nil
     @FocusState private var focusedField: Focus?
     @State private var fieldFocus: Bool = false
     
@@ -32,143 +33,146 @@ struct Search: View {
     // MARK: Layout
     
     var body: some View {
-        ZStack {
+        NavigationStack {
             
-            VStack(spacing: .DesignSystem.Spacing.l) {
+            VStack(spacing: .DesignSystem.Spacing.s) {
                 
-                HStack(spacing: .DesignSystem.Spacing.s) {
+                ZStack {
                     
-                    Image(systemName: "magnifyingglass")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 16, height: 16)
+                    ImageButton(
+                        image: Image(systemName: "chevron.down"),
+                        color: .primary,
+                        contentMode: .fit,
+                        size: .init(width: 20, height: 26),
+                        action: onTapBack
+                    )
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    ZStack(alignment: .leading) {
+                    Text("Looking for new friends?")
+                        .font(.DesignSystem.subtitle1(weight: .bold))
+                        .foregroundStyle(Color.primary)
+                    
+                }
+                .padding(.horizontal, .DesignSystem.Spacing.l)
+                .padding(.top, .DesignSystem.Spacing.s)
+                .padding(.bottom, .DesignSystem.Spacing.m)
+                
+                VStack(spacing: .DesignSystem.Spacing.l) {
+                    
+                    HStack(spacing: .DesignSystem.Spacing.s) {
                         
-                        if model.search.isEmpty {
+                        Image(systemName: "magnifyingglass")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 16, height: 16)
+                        
+                        ZStack(alignment: .leading) {
                             
-                            Text("Find new friends")
+                            if model.search.isEmpty {
+                                
+                                Text("Find new friends")
+                                    .font(.DesignSystem.body1(weight: .medium))
+                                    .foregroundStyle(Color.secondary)
+                                
+                            }
+                            
+                            TextField("", text: $model.search)
                                 .font(.DesignSystem.body1(weight: .medium))
-                                .foregroundStyle(Color.secondary)
+                                .foregroundStyle(Color.primary)
+                                .autocorrectionDisabled()
+                                .focused($focusedField, equals: .search)
                             
                         }
                         
-                        TextField("", text: $model.search)
-                            .font(.DesignSystem.body1(weight: .medium))
-                            .foregroundStyle(Color.primary)
-                            .autocorrectionDisabled()
-                            .focused($focusedField, equals: .search)
-                        
-                    }
-                    
-                    if !model.search.isEmpty {
-                        
-                        Button(action: onTapClear) {
-                            Image(systemName: "xmark.circle")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 20, height: 20)
-                                .foregroundStyle(Color.primary)
-                                .contentShape(Circle())
+                        if !model.search.isEmpty {
+                            
+                            Button(action: onTapClear) {
+                                Image(systemName: "xmark.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundStyle(Color.primary)
+                                    .contentShape(Circle())
+                            }
+                            
                         }
                         
                     }
+                    .padding(.horizontal, .DesignSystem.Spacing.l)
+                    .frame(height: 42)
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.secondary, lineWidth: 2)
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .contentShape(RoundedRectangle(cornerRadius: 8))
+                    .onTapGesture {
+                        focusedField = .search
+                    }
+                    .padding(.horizontal, .DesignSystem.Spacing.l)
                     
-                }
-                .padding(.horizontal, .DesignSystem.Spacing.l)
-                .frame(height: 42)
-                .background(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.secondary, lineWidth: 2)
-                )
-                .clipShape(RoundedRectangle(cornerRadius: 8))
-                .contentShape(RoundedRectangle(cornerRadius: 8))
-                .onTapGesture {
-                    focusedField = .search
-                }
-                .padding(.horizontal, .DesignSystem.Spacing.l)
-                
-                if model.search.isEmpty && model.searchUsers.isEmpty {
-                    
-                    Spacer()
-                    
-                } else if !model.search.isEmpty {
-                    
-                    if model.searchUsers.isEmpty {
+                    if model.search.isEmpty && model.searchUsers.isEmpty {
                         
                         Spacer()
                         
-                        TextPlaceholder(
-                            title: "No user found",
-                            subtitle: "Try a different search",
-                            buttonTitle: nil,
-                            action: nil
-                        )
-                        .padding(.horizontal, .DesignSystem.Spacing.xl)
+                    } else if !model.search.isEmpty {
                         
-                        Spacer()
+                        if model.searchUsers.isEmpty {
+                            
+                            Spacer()
+                            
+                            TextPlaceholder(
+                                title: "No user found",
+                                subtitle: "Try a different search",
+                                buttonTitle: nil,
+                                action: nil
+                            )
+                            .padding(.horizontal, .DesignSystem.Spacing.xl)
+                            
+                            Spacer()
+                            
+                        } else {
+                            
+                            ScrollView(.vertical) {
+                                
+                                LazyVStack(spacing: .DesignSystem.Spacing.l) {
+                                    
+                                    ForEach(model.searchUsers) { user in
+                                        
+                                        SearchUserItem(
+                                            user: user,
+                                            isFollowed: appManager.usersFollowed.contains(where: { $0.id == user.id }),
+                                            action: onTapItemUser,
+                                            followAction: onTapFollowUser
+                                        )
+                                        
+                                    }
+                                    
+                                }
+                                .padding(.horizontal, .DesignSystem.Spacing.l)
+                                
+                            }
+                            .scrollIndicators(.hidden)
+                            
+                        }
                         
                     } else {
                         
-                        ScrollView(.vertical) {
-                            
-                            LazyVStack(spacing: .DesignSystem.Spacing.l) {
-                                
-                                ForEach(model.searchUsers) { user in
-                                    
-                                    SearchUserItem(
-                                        user: user,
-                                        isFollowed: appManager.usersFollowed.contains(where: { $0.id == user.id }),
-                                        action: onTapItemUser
-                                    )
-                                    
-                                }
-                                
-                            }
-                            .padding(.horizontal, .DesignSystem.Spacing.l)
-                            
-                        }
-                        .scrollIndicators(.hidden)
+                        Spacer()
                         
                     }
-                    
-                } else {
-                    
-                    Spacer()
                     
                 }
                 
             }
-            .padding(.top, navBarHeight + .DesignSystem.Spacing.s)
-            
-            ZStack {
-                
-                ImageButton(
-                    image: Image(systemName: "chevron.down"),
-                    color: .primary,
-                    contentMode: .fit,
-                    size: .init(width: 20, height: 26),
-                    action: onTapBack
-                )
-                .frame(maxWidth: .infinity, alignment: .leading)
-                
-                Text("Looking for new friends?")
-                    .font(.DesignSystem.subtitle1(weight: .bold))
-                    .foregroundStyle(Color.primary)
-                
+            .navigationDestination(isPresented: $isUserPresented) {
+                UserProfile(isPresented: $isUserPresented, user: presentedUser)
             }
-            .padding(.top, .DesignSystem.Spacing.s)
-            .padding(.bottom, .DesignSystem.Spacing.m)
-            .padding(.horizontal, .DesignSystem.Spacing.l)
-            .heightRecorder { value in
-                navBarHeight = value
+            .contentShape(Rectangle())
+            .onTapGesture {
+                fieldFocus = false
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            
-        }
-        .contentShape(Rectangle())
-        .onTapGesture {
-            fieldFocus = false
+        
         }
         .onChange(of: focusedField) { oldValue, newValue in
             if newValue != nil {
@@ -203,6 +207,11 @@ struct Search: View {
     }
     
     private func onTapItemUser(_ user: User) -> Void {
+        presentedUser = user
+        isUserPresented = true
+    }
+    
+    private func onTapFollowUser(_ user: User) -> Void {
         if let index = appManager.usersFollowed.firstIndex(where: { $0.id == user.id }) {
             appManager.usersFollowed.remove(at: index)
         } else {

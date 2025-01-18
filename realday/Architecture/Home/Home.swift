@@ -17,9 +17,10 @@ struct Home: View {
     
     @StateObject var userManager: UserManager = .shared
     @StateObject var appManager: AppManager = .shared
-    @StateObject var model: HomeViewModel = .shared
+    @StateObject var model: HomeViewModel = HomeViewModel()
     
     @State private var navHeight: CGFloat = 0
+    @State private var bottomButtonHeight: CGFloat = 0
     @State private var isProfilePresented: Bool = false
     @State private var presentedUser: User?
     @State private var isPostPresented: Bool = false
@@ -44,68 +45,96 @@ struct Home: View {
                 
                 if model.displayType == .carousel {
                 
-                    ScrollView(.vertical) {
+                    if model.dayUsers.isEmpty {
                         
-                        LazyVStack(spacing: .DesignSystem.Spacing.l) {
+                        TextPlaceholder(
+                            title: "No user yet",
+                            subtitle: "Search for users to follow",
+                            buttonTitle: nil,
+                            action: nil
+                        )
+                        
+                    } else {
+                        
+                        ScrollView(.vertical) {
                             
-                            ForEach(model.dayUsers, id: \.self) { user in
+                            LazyVStack(spacing: .DesignSystem.Spacing.l) {
                                 
-                                VStack(spacing: .DesignSystem.Spacing.l) {
+                                ForEach(model.dayUsers, id: \.self) { user in
                                     
-                                    ProfilePictureSmall(user: user) {
-                                        onTapUser(user)
+                                    VStack(spacing: .DesignSystem.Spacing.l) {
+                                        
+                                        ProfilePictureSmall(user: user) {
+                                            onTapUser(user)
+                                        }
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.horizontal, .DesignSystem.Spacing.l)
+                                        
+                                        PostThumbnailCarousel2(
+                                            posts: user.posts!.filter({ $0.created > Date().addingTimeInterval(-86400) }).sorted(by: { $0.created > $1.created }),
+                                            showDate: true,
+                                            tapAction: onTapPost
+                                        )
+                                        
                                     }
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.horizontal, .DesignSystem.Spacing.l)
-                                    
-                                    PostThumbnailCarousel2(
-                                        posts: user.posts!.filter({ $0.created > Date().addingTimeInterval(-86400) }).sorted(by: { $0.created > $1.created }),
-                                        showDate: true,
-                                        tapAction: onTapPost
-                                    )
                                     
                                 }
                                 
                             }
+                            .padding(.top, navHeight + .DesignSystem.Spacing.l)
+                            .padding(.bottom, bottomButtonHeight + .DesignSystem.Spacing.l)
                             
                         }
-                        .padding(.top, navHeight + .DesignSystem.Spacing.l)
+                        .scrollIndicators(.hidden)
                         
                     }
-                    .scrollIndicators(.hidden)
                     
                 } else {
                     
-                    ScrollView(.vertical) {
+                    if model.gridPosts.isEmpty {
                         
-                        LazyVStack(spacing: .DesignSystem.Spacing.l) {
+                        TextPlaceholder(
+                            title: "No user yet",
+                            subtitle: "Search for users to follow",
+                            buttonTitle: nil,
+                            action: nil
+                        )
+                        
+                    } else {
+                        
+                        ScrollView(.vertical) {
                             
-                            ForEach(model.sortedTimePeriods(), id: \.self) { period in
+                            LazyVStack(spacing: .DesignSystem.Spacing.l) {
                                 
-                                if let posts = model.gridPosts[period], !posts.isEmpty {
+                                ForEach(model.sortedTimePeriods(), id: \.self) { period in
                                     
-                                    VStack(alignment: .leading, spacing: .DesignSystem.Spacing.m) {
-                                        // Titre de la période
-                                        Text(period.rawValue)
-                                            .font(.DesignSystem.subtitle1(weight: .bold))
-                                            .padding(.horizontal, .DesignSystem.Spacing.l)
+                                    if let posts = model.gridPosts[period], !posts.isEmpty {
                                         
-                                        LazyVGrid(
-                                            columns: columns, spacing: .DesignSystem.Spacing.s) {
-                                                ForEach(posts) { post in
-                                                    GridImage(pictureUrl: post.pictureUrl, date: post.created)
+                                        VStack(alignment: .leading, spacing: .DesignSystem.Spacing.m) {
+                                            
+                                            Text(period.rawValue)
+                                                .font(.DesignSystem.subtitle1(weight: .bold))
+                                                .padding(.horizontal, .DesignSystem.Spacing.l)
+                                            
+                                            LazyVGrid(
+                                                columns: columns, spacing: .DesignSystem.Spacing.s) {
+                                                    ForEach(posts) { post in
+                                                        GridImage(pictureUrl: post.pictureUrl, date: post.created)
+                                                    }
                                                 }
-                                            }
-                                        .padding(.horizontal, .DesignSystem.Spacing.l)
+                                            .padding(.horizontal, .DesignSystem.Spacing.l)
+                                        }
                                     }
                                 }
+                                
                             }
+                            .padding(.top, navHeight + .DesignSystem.Spacing.l)
+                            .padding(.bottom, bottomButtonHeight + .DesignSystem.Spacing.l)
                             
                         }
-                        .padding(.top, navHeight + .DesignSystem.Spacing.l)
+                        .scrollIndicators(.hidden)
                         
                     }
-                    .scrollIndicators(.hidden)
                     
                 }
                 
@@ -118,7 +147,7 @@ struct Home: View {
                     ]) {
                         HStack(spacing: .DesignSystem.Spacing.s) {
                             
-                            Label("Today", systemImage: model.displayType == .carousel ? "rectangle.split.3x1.fill" : "rectangle.grid.2x2.fill")
+                            Label("Past 24h", systemImage: model.displayType == .carousel ? "rectangle.split.3x1.fill" : "rectangle.grid.2x2.fill")
                             
                             Image(systemName: "chevron.down")
                                 .resizable()
@@ -140,13 +169,13 @@ struct Home: View {
                         action: onTapSearch
                     )
                     
-                    ImageButton(
-                        image: Image(systemName: "camera"),
-                        color: Color.primary,
-                        contentMode: .fit,
-                        size: .init(width: 32, height: 32),
-                        action: onTapCamera
-                    )
+//                    ImageButton(
+//                        image: Image(systemName: "camera"),
+//                        color: Color.primary,
+//                        contentMode: .fit,
+//                        size: .init(width: 32, height: 32),
+//                        action: onTapCamera
+//                    )
                     
                     ProfileButton(
                         pictureUrl: userManager.user?.profilePictureUrlString,
@@ -166,6 +195,25 @@ struct Home: View {
                     navHeight = value
                 }
                 .frame(maxHeight: .infinity, alignment: .top)
+                
+                Button(action: onTapCamera) {
+                    Image(systemName: "camera")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 32, height: 32)
+                        .foregroundStyle(Color.white)
+                        .frame(width: 64, height: 64)
+                        .background(
+                            Color.blue
+                        )
+                        .clipShape(Circle())
+                        .contentShape(Circle())
+                }
+                .heightRecorder { value in
+                    bottomButtonHeight = value
+                }
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                .padding(.bottom, .DesignSystem.Spacing.m)
                 
             }
             .navigationDestination(isPresented: $isProfilePresented) {

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import DesignSystem
+import PhotosUI
 
 // MARK: - New Post
 
@@ -21,12 +22,18 @@ struct NewPost: View {
     @StateObject private var model: NewPostViewModel = NewPostViewModel()
     @State private var navBarHeight: CGFloat = 0
     @State private var presentCamera: Bool = false
+    @State private var errorCamera: Bool = false
+    @State private var timerErrorCamera: Double = 0
     @FocusState private var focusedField: Focus?
     @State private var fieldFocus: Bool = false
     
     private enum Focus: Int, Hashable {
         case caption
     }
+    
+    // MARK: Constants
+    
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     
     // MARK: Layout
     
@@ -48,20 +55,32 @@ struct NewPost: View {
                     RoundedRectangle(cornerRadius: 8)
                         .foregroundStyle(model.image == nil ? Color.DesignSystem.skeletonBackground : .clear)
                         
-                    
-                    Button(action: onTapTakePicture) {
-                        Image(systemName: "camera")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 32, height: 32)
-                            .foregroundStyle(Color.white)
-                            .frame(width: 64, height: 64)
-                            .background(
-                                BlurEffect(style: .systemUltraThinMaterialDark)
-                            )
-                            .clipShape(Circle())
-                            .contentShape(Circle())
+                    VStack(spacing: .DesignSystem.Spacing.m) {
+                        
+                        Button(action: onTapTakePicture) {
+                            Image(systemName: "camera")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 32, height: 32)
+                                .foregroundStyle(Color.white)
+                                .frame(width: 64, height: 64)
+                                .background(
+                                    BlurEffect(style: .systemUltraThinMaterialDark)
+                                )
+                                .clipShape(Circle())
+                                .contentShape(Circle())
+                        }
+                        
+                        if errorCamera {
+                            
+                            Text("Camera unavailable")
+                                .font(.DesignSystem.body2(weight: .bold))
+                                .foregroundStyle(Color.red)
+                            
+                        }
+                        
                     }
+                    
                     .frame(maxHeight: .infinity, alignment: .bottom)
                     .padding(.bottom, .DesignSystem.Spacing.l)
                     
@@ -128,9 +147,10 @@ struct NewPost: View {
                     action: onTapConfirm
                 )
                 .padding(.horizontal, .DesignSystem.Spacing.l)
+                .padding(.bottom, .DesignSystem.Spacing.m)
                 
             }
-            .padding(.top, navBarHeight + .DesignSystem.Spacing.l)
+            .padding(.top, navBarHeight)
             
             ImageButton(
                 image: Image(systemName: "chevron.down"),
@@ -168,6 +188,16 @@ struct NewPost: View {
         .onChange(of: model.caption) { oldValue, newValue in
             onChangeCaption(newValue: newValue)
         }
+        .onReceive(timer) { _ in
+            if timerErrorCamera > 0 {
+                timerErrorCamera -= 0.1
+            } else {
+                timerErrorCamera = 0
+                withAnimation(.easeOut(duration: 0.2)) {
+                    errorCamera = false
+                }
+            }
+        }
         .sheet(isPresented: $presentCamera) {
             CameraPicker(imageCompletion: model.imageCompletion(result:))
                 .background(
@@ -182,6 +212,11 @@ struct NewPost: View {
         model.caption = String(newValue.prefix(model.captionMaxLenght))
     }
     
+    private func openApplicationSystemSettings() -> Void {
+        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+        UIApplication.shared.open(url)
+    }
+    
     // MARK: Actions
     
     private func onTapBack() -> Void {
@@ -189,7 +224,19 @@ struct NewPost: View {
     }
     
     private func onTapTakePicture() -> Void {
-        presentCamera = true
+        if UIImagePickerController.isCameraDeviceAvailable(.front) || UIImagePickerController.isCameraDeviceAvailable(.rear) {
+            let authorization = AVCaptureDevice.authorizationStatus(for: .video)
+            if authorization == .authorized || authorization == .notDetermined {
+                presentCamera = true
+            } else {
+                openApplicationSystemSettings()
+            }
+        } else {
+            timerErrorCamera = 3
+            withAnimation(.easeOut(duration: 0.2)) {
+                errorCamera = true
+            }
+        }
     }
     
     private func onTapConfirm() -> Void {

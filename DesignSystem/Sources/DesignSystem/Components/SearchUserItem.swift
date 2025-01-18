@@ -17,6 +17,7 @@ public struct SearchUserItem: View {
     private let user: User
     private let isFollowed: Bool
     private let action: ((User) -> Void)?
+    private let followAction: ((User) -> Void)?
     
     // MARK: States
     
@@ -31,10 +32,11 @@ public struct SearchUserItem: View {
     
     // MARK: Init
     
-    public init(user: User, isFollowed: Bool, action: ((User) -> Void)?) {
+    public init(user: User, isFollowed: Bool, action: ((User) -> Void)?, followAction: ((User)-> Void)?) {
         self.user = user
         self.isFollowed = isFollowed
         self.action = action
+        self.followAction = followAction
     }
     
     // MARK: Layout
@@ -87,7 +89,7 @@ public struct SearchUserItem: View {
             
             Spacer()
             
-            Button(action: onTap) {
+            Button(action: onTapFollow) {
                 Text(followButtonTitle())
                     .font(.DesignSystem.body2(weight: .bold))
                     .foregroundStyle(followButtonTextColor())
@@ -101,6 +103,8 @@ public struct SearchUserItem: View {
             }
             
         }
+        .contentShape(Rectangle())
+        .onTapGesture(perform: onTap)
         .onAppear(perform: onAppear)
     }
     
@@ -168,6 +172,12 @@ public struct SearchUserItem: View {
             action(user)
         }
     }
+    
+    private func onTapFollow() -> Void {
+        if let followAction {
+            followAction(user)
+        }
+    }
 }
 
 // MARK: - Previews
@@ -175,9 +185,9 @@ public struct SearchUserItem: View {
 #Preview {
     VStack(spacing: .DesignSystem.Spacing.s) {
         
-        SearchUserItem(user: .randomUser(), isFollowed: false, action: nil)
+        SearchUserItem(user: .randomUser(), isFollowed: false, action: nil, followAction: nil)
         
-        SearchUserItem(user: .randomUser(), isFollowed: true, action: nil)
+        SearchUserItem(user: .randomUser(), isFollowed: true, action: nil, followAction: nil)
         
     }
     .padding(.horizontal, .DesignSystem.Spacing.l)

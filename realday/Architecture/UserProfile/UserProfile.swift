@@ -25,7 +25,13 @@ struct UserProfile: View {
     @StateObject var model: UserProfileViewModel = UserProfileViewModel()
     @State private var navBarHeight: CGFloat = 0
     @State private var presentCamera: Bool = false
+    @State private var errorCamera: Bool = false
+    @State private var timerErrorCamera: Double = 0
     @State private var updateProfilePicture: Bool = false
+    
+    // MARK: Constants
+    
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     
     // MARK: Layout
     
@@ -42,11 +48,23 @@ struct UserProfile: View {
                             
                             VStack(spacing: .DesignSystem.Spacing.xl) {
                                 
-                                ProfilePictureLarge(
-                                    pictureUrl: model.pictureUrl,
-                                    text: user.firstName + " " + user.lastName,
-                                    action: user.id == userManager.user?.id ? onTapProfilePicture : nil
-                                )
+                                VStack(spacing: .DesignSystem.Spacing.m) {
+                                    
+                                    ProfilePictureLarge(
+                                        pictureUrl: model.pictureUrl,
+                                        text: user.firstName + " " + user.lastName,
+                                        action: user.id == userManager.user?.id ? onTapProfilePicture : nil
+                                    )
+                                    
+                                    if errorCamera {
+                                        
+                                        Text("Camera unavailable")
+                                            .font(.DesignSystem.body2(weight: .bold))
+                                            .foregroundStyle(Color.red)
+                                        
+                                    }
+                                    
+                                }
                                 
                                 VStack(spacing: .DesignSystem.Spacing.xl) {
                                     
@@ -81,11 +99,23 @@ struct UserProfile: View {
                         
                         VStack(spacing: .DesignSystem.Spacing.xl) {
                             
-                            ProfilePictureLarge(
-                                pictureUrl: model.pictureUrl,
-                                text: user.firstName + " " + user.lastName,
-                                action: user.id == userManager.user?.id ? onTapProfilePicture : nil
-                            )
+                            VStack(spacing: .DesignSystem.Spacing.m) {
+                                
+                                ProfilePictureLarge(
+                                    pictureUrl: model.pictureUrl,
+                                    text: user.firstName + " " + user.lastName,
+                                    action: user.id == userManager.user?.id ? onTapProfilePicture : nil
+                                )
+                                
+                                if errorCamera {
+                                    
+                                    Text("Camera unavailable")
+                                        .font(.DesignSystem.body2(weight: .bold))
+                                        .foregroundStyle(Color.red)
+                                    
+                                }
+                                
+                            }
                             
                             Spacer()
                             
@@ -166,6 +196,16 @@ struct UserProfile: View {
                     Color.black
                 )
         }
+        .onReceive(timer) { _ in
+            if timerErrorCamera > 0 {
+                timerErrorCamera -= 0.1
+            } else {
+                timerErrorCamera = 0
+                withAnimation(.easeOut(duration: 0.2)) {
+                    errorCamera = false
+                }
+            }
+        }
         .toolbar(.hidden)
         .onAppear(perform: onAppear)
     }
@@ -190,6 +230,11 @@ struct UserProfile: View {
         return "This user has not shared anything yet"
     }
     
+    private func openApplicationSystemSettings() -> Void {
+        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+        UIApplication.shared.open(url)
+    }
+    
     // MARK: Actions
     
     private func onTapBack() -> Void {
@@ -202,15 +247,12 @@ struct UserProfile: View {
             if authorization == .authorized || authorization == .notDetermined {
                 presentCamera = true
             } else {
-                model.errorCamera = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    model.errorCamera = false
-                }
+                openApplicationSystemSettings()
             }
         } else {
-            model.errorCamera = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                model.errorCamera = false
+            timerErrorCamera = 3
+            withAnimation(.easeOut(duration: 0.2)) {
+                errorCamera = true
             }
         }
     }

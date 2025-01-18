@@ -23,8 +23,13 @@ class SearchViewModel: ObservableObject {
         if search.isEmpty {
             searchUsers = []
         } else if AppManager.shared.users.count > 0 {
-            let randomSearch = Int.random(in: 0..<AppManager.shared.users.count)
-            searchUsers = Array(AppManager.shared.users.shuffled().prefix(randomSearch))
+            Task.detached {
+                let randomSearch = Int.random(in: 0..<AppManager.shared.users.count)
+                let randomUsers = Array(AppManager.shared.users.shuffled().prefix(randomSearch))
+                await MainActor.run {
+                    self.searchUsers = randomUsers
+                }
+            }
         }
     }
 }

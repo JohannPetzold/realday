@@ -17,6 +17,9 @@
     "Already an account? Login" : {
 
     },
+    "Camera unavailable" : {
+
+    },
     "Caption" : {
 
     },
@@ -35,6 +38,9 @@
     "or" : {
 
     },
+    "Past 24h" : {
+
+    },
     "RealDay" : {
 
     },
@@ -42,9 +48,6 @@
 
     },
     "Take a photo and add a caption to show your day!" : {
-
-    },
-    "Today" : {
 
     },
     "Welcome" : {
