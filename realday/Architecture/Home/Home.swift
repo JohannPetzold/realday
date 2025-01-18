@@ -70,8 +70,8 @@ struct Home: View {
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .padding(.horizontal, .DesignSystem.Spacing.l)
                                         
-                                        PostThumbnailCarousel2(
-                                            posts: user.posts!.filter({ $0.created > Date().addingTimeInterval(-86400) }).sorted(by: { $0.created > $1.created }),
+                                        PostThumbnailCarousel3(
+                                            posts: user.posts!.filter({ $0.created > Date().addingTimeInterval(-86400) }).sorted(by: { $0.created < $1.created }),
                                             showDate: true,
                                             tapAction: onTapPost
                                         )

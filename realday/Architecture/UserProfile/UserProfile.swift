@@ -78,8 +78,8 @@ struct UserProfile: View {
                                                 .frame(maxWidth: .infinity, alignment: .leading)
                                                 .padding(.leading, .DesignSystem.Spacing.xl)
                                             
-                                            PostThumbnailCarousel2(
-                                                posts: model.filteredPosts[i].sorted(by: { $0.created > $1.created }),
+                                            PostThumbnailCarousel3(
+                                                posts: model.filteredPosts[i].sorted(by: { $0.created < $1.created }),
                                                 showDate: false,
                                                 tapAction: onTapPost(_:))
                                             

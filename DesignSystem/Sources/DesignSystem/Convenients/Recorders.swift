@@ -10,7 +10,7 @@ import SwiftUI
 
 extension View {
     
-    @ViewBuilder public func heightRecorder(update: @Sendable @escaping (_ value: CGFloat) -> Void) -> some View {
+    @ViewBuilder public func heightRecorder(update: @escaping (_ value: CGFloat) -> Void) -> some View {
         self
             .background(
                 GeometryReader { proxy in
@@ -22,6 +22,7 @@ extension View {
 }
 
 public struct CGFloatPreferenceKey: @preconcurrency PreferenceKey {
+    
     @MainActor public static var defaultValue: CGFloat = 0
     
     public static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {

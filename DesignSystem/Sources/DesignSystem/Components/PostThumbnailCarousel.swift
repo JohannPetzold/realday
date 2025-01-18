@@ -35,7 +35,6 @@ public struct PostThumbnailCarousel: View {
     // MARK: Constants
     
     private let hSpacing: CGFloat = 16
-    private let impactMed = UIImpactFeedbackGenerator(style: .soft)
     private let layoutSize: CGSize = .init(width: 240, height: 388)
     
     // MARK: Init
