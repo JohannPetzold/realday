@@ -40,12 +40,12 @@ public struct ProfileButton: View {
     public var body: some View {
         Button(action: onTap) {
             Circle()
-                .skeleton(
-                    enabled: isLoadingImage,
-                    type: .circle,
-                    frameColor: .DesignSystem.skeletonBackground,
-                    cornerRadius: 100
-                )
+//                .skeleton(
+//                    enabled: isLoadingImage,
+//                    type: .circle,
+//                    frameColor: .DesignSystem.skeletonBackground,
+//                    cornerRadius: 100
+//                )
                 .foregroundStyle(Color.DesignSystem.buttonBackground)
                 .frame(width: 42, height: 42)
                 .overlay {
