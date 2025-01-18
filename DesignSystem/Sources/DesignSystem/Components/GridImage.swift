@@ -15,6 +15,7 @@ public struct GridImage: View {
     // MARK: Properties
     
     private let pictureUrl: String
+    private let date: Date
     
     // MARK: States
     
@@ -24,43 +25,54 @@ public struct GridImage: View {
     
     // MARK: Init
     
-    public init(pictureUrl: String) {
+    public init(pictureUrl: String, date: Date) {
         self.pictureUrl = pictureUrl
+        self.date = date
     }
     
     // MARK: Layout
     
     public var body: some View {
-        RoundedRectangle(cornerRadius: 8)
-            .foregroundStyle(Color.DesignSystem.skeletonBackground)
-            .overlay(
-                Group {
+        ZStack {
+            
+            RoundedRectangle(cornerRadius: 8)
+                .foregroundStyle(image == nil ? Color.DesignSystem.skeletonBackground : .clear)
+                
+            if image == nil && !isLoadingImage {
+                
+                Image(systemName: "photo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+                    .foregroundStyle(Color.primary)
+                
+            }
+            
+            Text(date.formatTimeOnly())
+                .font(.DesignSystem.sub1(weight: .bold))
+                .foregroundStyle(image == nil ? Color.primary : Color.white)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                .padding(.leading, .DesignSystem.Spacing.xs)
+                .padding(.bottom, .DesignSystem.Spacing.xs)
+            
+        }
+        .background(
+            ZStack {
+                if let image {
                     
-                    if isLoadingImage {
-                        
-                        EmptyView()
-                        
-                    } else if let image {
-                        
-                        image
-                            .resizable()
-                            .scaledToFill()
-                        
-                    } else {
-                        
-                        Image(systemName: "photo")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 24, height: 24)
-                            .foregroundStyle(Color.primary)
-                        
-                    }
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .clipped()
+                    
+                    BlurGradient(height: 24)
                     
                 }
-            )
-            .clipShape(RoundedRectangle(cornerRadius: 8))
-            .aspectRatio(.init(width: 240, height: 420), contentMode: .fit)
-            .onAppear(perform: onAppear)
+            }
+        )
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .aspectRatio(.init(width: 240, height: 420), contentMode: .fit)
+        .onAppear(perform: onAppear)
     }
     
     // MARK: Privates
@@ -104,5 +116,5 @@ public struct GridImage: View {
 // MARK: - Previews
 
 #Preview {
-    GridImage(pictureUrl: Post.randomPost().pictureUrl)
+    GridImage(pictureUrl: Post.randomPost().pictureUrl, date: Date())
 }

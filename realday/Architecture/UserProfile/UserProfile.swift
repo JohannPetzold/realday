@@ -167,7 +167,6 @@ struct UserProfile: View {
                 )
         }
         .toolbar(.hidden)
-        .toolbar(.hidden, for: .tabBar)
         .onAppear(perform: onAppear)
     }
     

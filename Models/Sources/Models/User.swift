@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - User
 
-public struct User: Codable, Sendable, Hashable {
+public struct User: Codable, Sendable, Hashable, Identifiable {
 
     // MARK: Properties
     
@@ -41,10 +41,11 @@ public struct User: Codable, Sendable, Hashable {
         }
         
         // Select a random user
-        guard let randomUser = users.randomElement() else {
+        guard var randomUser = users.randomElement() else {
             fatalError("No users available in JSON.")
         }
         
+        randomUser.id = UUID().uuidString
         return randomUser
     }
 }

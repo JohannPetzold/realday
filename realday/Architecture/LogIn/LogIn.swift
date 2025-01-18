@@ -104,18 +104,14 @@ struct LogIn: View {
                         
                     }
                     
-                    if focusedField == nil && !disableLogIn() {
-                     
-                        TextButton(
-                            text: "Log In",
-                            type: .blue,
-                            font: .DesignSystem.body1(weight: .bold),
-                            isLoading: model.isLoadingLogIn,
-                            disabled: disableLogIn(),
-                            action: onTapLogIn
-                        )
-                        
-                    }
+                    TextButton(
+                        text: "Log In",
+                        type: .blue,
+                        font: .DesignSystem.body1(weight: .bold),
+                        isLoading: model.isLoadingLogIn,
+                        disabled: disableLogIn(),
+                        action: onTapLogIn
+                    )
                     
                 }
                 .padding(.horizontal, .DesignSystem.Spacing.l)

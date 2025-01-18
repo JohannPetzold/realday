@@ -53,7 +53,7 @@ class UserProfileViewModel: ObservableObject {
             } catch {
                 // error
             }
-        case .failure(let error):
+        case .failure(_):
             break
         }
     }

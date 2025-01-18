@@ -1,21 +1,22 @@
 //
-//  ProfilePictureSmall.swift
+//  SearchUserItem.swift
 //  DesignSystem
 //
-//  Created by Johann Petzold on 17/01/2025.
+//  Created by Johann Petzold on 18/01/2025.
 //
 
 import SwiftUI
 import Models
 
-// MARK: - Profile Picture Small
+// MARK: - Search User Item
 
-public struct ProfilePictureSmall: View {
+public struct SearchUserItem: View {
     
     // MARK: Properties
     
     private let user: User
-    private let action: (() -> Void)?
+    private let isFollowed: Bool
+    private let action: ((User) -> Void)?
     
     // MARK: States
     
@@ -26,19 +27,20 @@ public struct ProfilePictureSmall: View {
     
     // MARK: Constants
     
-    private let imageSize: CGSize = .init(width: 28, height: 28)
+    private let imageSize: CGSize = .init(width: 48, height: 48)
     
     // MARK: Init
     
-    public init(user: User, action: (() -> Void)?) {
+    public init(user: User, isFollowed: Bool, action: ((User) -> Void)?) {
         self.user = user
+        self.isFollowed = isFollowed
         self.action = action
     }
     
     // MARK: Layout
     
     public var body: some View {
-        HStack(spacing: .DesignSystem.Spacing.s) {
+        HStack(spacing: .DesignSystem.Spacing.l) {
             
             if isLoadingImage {
                 
@@ -69,7 +71,7 @@ public struct ProfilePictureSmall: View {
                     Image(systemName: "person")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 12, height: 12)
+                        .frame(width: 16, height: 16)
                         .foregroundStyle(.primary)
                     
                 }
@@ -79,13 +81,26 @@ public struct ProfilePictureSmall: View {
             }
             
             Text("\(user.firstName) \(user.lastName)")
-                .font(.DesignSystem.body2(weight: .bold))
+                .font(.DesignSystem.body1(weight: .bold))
                 .foregroundStyle(.primary)
                 .lineLimit(1)
             
+            Spacer()
+            
+            Button(action: onTap) {
+                Text(followButtonTitle())
+                    .font(.DesignSystem.body2(weight: .bold))
+                    .foregroundStyle(followButtonTextColor())
+                    .padding(.horizontal, .DesignSystem.Spacing.l)
+                    .padding(.vertical, .DesignSystem.Spacing.s)
+                    .background(
+                        followButtonBackgroundColor()
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .contentShape(RoundedRectangle(cornerRadius: 8))
+            }
+            
         }
-        .contentShape(Rectangle())
-        .onTapGesture(perform: onTap)
         .onAppear(perform: onAppear)
     }
     
@@ -124,12 +139,33 @@ public struct ProfilePictureSmall: View {
             }
         }
     }
+                     
+    private func followButtonTitle() -> String {
+        if isFollowed {
+            return "Unfollow"
+        }
+        return "Follow"
+    }
+    
+    private func followButtonTextColor() -> Color {
+        if isFollowed {
+            return Color.primary
+        }
+        return Color.white
+    }
+    
+    private func followButtonBackgroundColor() -> Color {
+        if isFollowed {
+            return Color.secondary.opacity(0.4)
+        }
+        return Color.blue
+    }
     
     // MARK: Actions
     
     private func onTap() -> Void {
         if let action {
-            action()
+            action(user)
         }
     }
 }
@@ -137,12 +173,12 @@ public struct ProfilePictureSmall: View {
 // MARK: - Previews
 
 #Preview {
-    VStack(spacing: .DesignSystem.Spacing.l) {
+    VStack(spacing: .DesignSystem.Spacing.s) {
         
-        ForEach(0..<6, id: \.self) { _ in
-            
-            ProfilePictureSmall(user: .randomUser(), action: nil)
-            
-        }
+        SearchUserItem(user: .randomUser(), isFollowed: false, action: nil)
+        
+        SearchUserItem(user: .randomUser(), isFollowed: true, action: nil)
+        
     }
+    .padding(.horizontal, .DesignSystem.Spacing.l)
 }

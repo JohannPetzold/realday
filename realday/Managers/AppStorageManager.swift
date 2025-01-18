@@ -41,9 +41,6 @@ class AppStorageManager {
             return
         }
         user = userEncoded
-        Task {
-            try? await FileStorageManager.clearTmp()
-        }
         logger.notice("User successfully stored in storage")
     }
     

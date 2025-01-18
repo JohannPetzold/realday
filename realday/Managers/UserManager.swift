@@ -37,12 +37,18 @@ class UserManager: ObservableObject {
     func signUser(firstName: String, lastName: String, email: String, password: String) -> Void {
         self.user = User(id: UUID().uuidString, firstName: firstName, lastName: lastName, email: email, password: password)
         AppStorageManager.shared.setUser(self.user)
+        Task {
+            try? await FileStorageManager.clearTmp()
+        }
     }
     
     func signInWithApple() -> Void {
         self.user = .randomUser()
         self.user?.posts = Post.randomPosts(count: 4)
         AppStorageManager.shared.setUser(self.user)
+        Task {
+            try? await FileStorageManager.clearTmp()
+        }
     }
     
     func loginUser(email: String, password: String, _ emptyCompletion: @escaping () -> Void) -> Void {
@@ -52,6 +58,11 @@ class UserManager: ObservableObject {
             return
         }
         self.user = storedUser
+    }
+    
+    func addNewPost(_ post: Post) -> Void {
+        user?.posts = (user?.posts ?? []) + [post]
+        AppStorageManager.shared.setUser(UserManager.shared.user)
     }
     
     func disconnect() -> Void {

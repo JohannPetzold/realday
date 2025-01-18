@@ -24,6 +24,8 @@ struct Home: View {
     @State private var presentedUser: User?
     @State private var isPostPresented: Bool = false
     @State private var presentedPost: Post = .randomPost()
+    @State private var isNewPostPresented: Bool = false
+    @State private var isSearchPresented: Bool = false
     
     // MARK: Constants
     
@@ -91,7 +93,7 @@ struct Home: View {
                                         LazyVGrid(
                                             columns: columns, spacing: .DesignSystem.Spacing.s) {
                                                 ForEach(posts) { post in
-                                                    GridImage(pictureUrl: post.pictureUrl)
+                                                    GridImage(pictureUrl: post.pictureUrl, date: post.created)
                                                 }
                                             }
                                         .padding(.horizontal, .DesignSystem.Spacing.l)
@@ -131,6 +133,14 @@ struct Home: View {
                     Spacer()
                     
                     ImageButton(
+                        image: Image(systemName: "magnifyingglass"),
+                        color: Color.primary,
+                        contentMode: .fit,
+                        size: .init(width: 28, height: 28),
+                        action: onTapSearch
+                    )
+                    
+                    ImageButton(
                         image: Image(systemName: "camera"),
                         color: Color.primary,
                         contentMode: .fit,
@@ -164,6 +174,12 @@ struct Home: View {
             .navigationDestination(isPresented: $isPostPresented) {
                 PostView(isPresented: $isPostPresented, post: presentedPost)
             }
+            .fullScreenCover(isPresented: $isNewPostPresented) {
+                NewPost(isPresented: $isNewPostPresented)
+            }
+            .fullScreenCover(isPresented: $isSearchPresented) {
+                Search(isPresented: $isSearchPresented)
+            }
         }
     }
     
@@ -188,7 +204,11 @@ struct Home: View {
     }
     
     private func onTapCamera() -> Void {
-        
+        isNewPostPresented = true
+    }
+    
+    private func onTapSearch() -> Void {
+        isSearchPresented = true
     }
     
     private func onTapMenuCarousel() -> Void {

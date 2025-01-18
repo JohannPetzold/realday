@@ -31,17 +31,21 @@ class AppManager: ObservableObject {
     // MARK: Published
     
     @Published var usersFollowed: [User] = []
+    @Published var users: [User] = []
     
     // MARK: Methods
     
     func initDatas() -> Void {
-        let random = Int.random(in: 5..<20)
+        let randomUserCount = Int.random(in: 20..<50)
         var users: [User] = []
-        for _ in 0..<random {
+        for _ in 0..<randomUserCount {
             var newUser = User.randomUser()
             newUser.posts = Post.randomPosts(count: Int.random(in: 1..<20))
             users.append(newUser)
         }
-        usersFollowed = users
+        self.users = users
+        
+        let followedCount = Int.random(in: 4...randomUserCount)
+        self.usersFollowed = Array(users.shuffled().prefix(followedCount))
     }
 }

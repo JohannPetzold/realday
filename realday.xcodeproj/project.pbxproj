@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		401D13B72D3BABF3001D6FA1 /* NewPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401D13B62D3BABF3001D6FA1 /* NewPost.swift */; };
+		401D13B92D3BAC11001D6FA1 /* NewPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401D13B82D3BAC11001D6FA1 /* NewPostViewModel.swift */; };
+		401D13C12D3BBF6A001D6FA1 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401D13C02D3BBF6A001D6FA1 /* Search.swift */; };
+		401D13C32D3BC0A4001D6FA1 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401D13C22D3BC0A4001D6FA1 /* SearchViewModel.swift */; };
 		4022F3E72D3A7F9600820E44 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 407D7F072D398DC000520288 /* Models */; };
 		4022F3F42D3A806F00820E44 /* AppStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4022F3F32D3A806F00820E44 /* AppStorageManager.swift */; };
 		407D7EF52D398A6500520288 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 407D7EEF2D398A6500520288 /* Assets.xcassets */; };
@@ -49,6 +53,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		401D13B62D3BABF3001D6FA1 /* NewPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPost.swift; sourceTree = "<group>"; };
+		401D13B82D3BAC11001D6FA1 /* NewPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewModel.swift; sourceTree = "<group>"; };
+		401D13C02D3BBF6A001D6FA1 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
+		401D13C22D3BC0A4001D6FA1 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		4022F3F32D3A806F00820E44 /* AppStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageManager.swift; sourceTree = "<group>"; };
 		407D7EA82D3988CE00520288 /* realday.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = realday.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		407D7EB82D3988CF00520288 /* realdayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = realdayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +125,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		401D13B52D3BABE3001D6FA1 /* NewPost */ = {
+			isa = PBXGroup;
+			children = (
+				401D13B62D3BABF3001D6FA1 /* NewPost.swift */,
+				401D13B82D3BAC11001D6FA1 /* NewPostViewModel.swift */,
+			);
+			path = NewPost;
+			sourceTree = "<group>";
+		};
+		401D13BF2D3BBF5E001D6FA1 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				401D13C02D3BBF6A001D6FA1 /* Search.swift */,
+				401D13C22D3BC0A4001D6FA1 /* SearchViewModel.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		4022F3F52D3A825C00820E44 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +194,8 @@
 				40C38A382D39B63700FFDF97 /* LogIn */,
 				4022F3F52D3A825C00820E44 /* Home */,
 				40D919372D3AC77D000802E3 /* UserProfile */,
+				401D13B52D3BABE3001D6FA1 /* NewPost */,
+				401D13BF2D3BBF5E001D6FA1 /* Search */,
 				40D919422D3AEA64000802E3 /* PostView */,
 			);
 			path = Architecture;
@@ -414,6 +442,7 @@
 				407D7EF82D398A6500520288 /* Onboarding.swift in Sources */,
 				40C38A302D39B47E00FFDF97 /* SignUp.swift in Sources */,
 				407D7F002D398CF700520288 /* ArchitectureGate.swift in Sources */,
+				401D13B92D3BAC11001D6FA1 /* NewPostViewModel.swift in Sources */,
 				407D7EF92D398A6500520288 /* OnboardingViewModel.swift in Sources */,
 				40C38A3C2D39B65800FFDF97 /* LogInViewModel.swift in Sources */,
 				407D7F032D398D2500520288 /* UserManager.swift in Sources */,
@@ -425,8 +454,11 @@
 				40D919392D3AC78E000802E3 /* UserProfile.swift in Sources */,
 				4082226A2D3A725C00710A23 /* UINavigationController+Extension.swift in Sources */,
 				40C38A322D39B48800FFDF97 /* SignUpViewModel.swift in Sources */,
+				401D13C32D3BC0A4001D6FA1 /* SearchViewModel.swift in Sources */,
 				40D919402D3AD876000802E3 /* UserProfileViewModel.swift in Sources */,
 				40D919442D3AEA76000802E3 /* PostView.swift in Sources */,
+				401D13C12D3BBF6A001D6FA1 /* Search.swift in Sources */,
+				401D13B72D3BABF3001D6FA1 /* NewPost.swift in Sources */,
 				40C38A3A2D39B64500FFDF97 /* LogIn.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
